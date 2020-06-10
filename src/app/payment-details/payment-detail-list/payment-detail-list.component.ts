@@ -21,9 +21,22 @@ export class PaymentDetailListComponent implements OnInit {
     this.service.formData = Object.assign({}, pd);
   }
 
-  onDelete(PMId) {
+  onUpdate(pd) {
+    for (let i = 0; i < this.service.list.length; i++) {
+      if (this.service.list[i].pmId == pd.pmId)
+      {
+        this.service.list[i].isEditable = !this.service.list[i].isEditable;
+
+        if(!this.service.list[i].isEditable){ // done editing, then send update rqs
+          this.service.updatePaymentDetail(this.service.list[i]);
+        }
+      }
+    }
+  }
+
+  onDelete(pmId) {
     if (confirm('Are you sure to delete this record ?')) {
-      this.service.deletePaymentDetail(PMId)
+      this.service.deletePaymentDetail(pmId)
         .subscribe(res => {
           debugger;
           this.service.refreshList();

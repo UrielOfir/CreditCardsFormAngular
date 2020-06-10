@@ -22,16 +22,17 @@ export class PaymentDetailComponent implements OnInit {
     if (form != null)
       form.form.reset();
     this.service.formData = {
-      PMId: 0,
-      CardOwnerName: '',
-      CardNumber: '',
-      ExpirationDate: '',
-      CVV: ''
+      pmId: 0,
+      cardOwnerName: '',
+      cardNumber: '',
+      expirationDate: '',
+      cvv: '',
+      isEditable: false
     }
   }
 
   onSubmit(form: NgForm) {
-    if (this.service.formData.PMId == 0)
+    if (this.service.formData.pmId == 0)
       this.insertRecord(form);
     else
       this.updateRecord(form);
